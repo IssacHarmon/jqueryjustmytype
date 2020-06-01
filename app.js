@@ -48,11 +48,10 @@ $(document).ready(function () {
 
 		if (start === null) {
 			start = Date.now();
+			console.log((start = Date.now()));
 		}
-		console.log(start);
 
 		$('#yellow-block').css('left', '+=17.5px');
-		letterIndex++;
 
 		let nextLetter = currentSentence[letterIndex];
 		currentLetterDiv.text(nextLetter);
@@ -66,16 +65,20 @@ $(document).ready(function () {
 			}
 		}
 
+		letterIndex++;
+
 		if (letterIndex == currentSentence.length) {
 			$('#sentence').empty();
 			$('#feedback').empty();
 			sentenceIndex++;
 			currentSentence = sentences[sentenceIndex];
 			if (currentSentence === undefined) {
-				gameOver();
+                gameOver();
+                $(document).off();
+                $('#target-letter').empty();
+                $('#target-letter').append(`<button class ="button" onClick="window.location.reload();"> Would you like to try again?</button>`)
 			} else {
 				$('#sentence').append(currentSentence);
-				console.log(currentSentence);
 
 				letterIndex = 0;
 				if (sentenceIndex < sentences.length - 1) {
@@ -95,6 +98,5 @@ $(document).ready(function () {
 		time /= 60000;
 		let score = Math.round(54 / time - 2 * errors);
 		$('#feedback').text('Your score is ' + score + ' words per minute. GET IT MY HOMIE!');
-		console.log('Your score is ' + score + ' words per minute. GET IT MY HOMIE!');
 	}
 });

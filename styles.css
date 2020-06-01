@@ -40,3 +40,9 @@
 .glyphicon-remove {
   color : #CD2626
 }
+
+.button {
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  background-color: rgb(72, 133, 202);
+  font-family: Georgia;
+}

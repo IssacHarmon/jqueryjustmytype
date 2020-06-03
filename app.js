@@ -48,7 +48,6 @@ $(document).ready(function () {
 
 		if (start === null) {
 			start = Date.now();
-			console.log((start = Date.now()));
 		}
 
 		$('#yellow-block').css('left', '+=17.5px');
@@ -60,8 +59,8 @@ $(document).ready(function () {
 			if (asciiCode === sentences[sentenceIndex][letterIndex].charCodeAt(0)) {
 				$('#feedback').append("<span class= 'glyphicon glyphicon-ok'></span>");
 			} else {
-				$('#feedback').append("<span class = 'glyphicon glyphicon-remove'></span>");
 				errors++;
+				$('#feedback').append("<span class = 'glyphicon glyphicon-remove'></span>");
 			}
 		}
 
@@ -72,31 +71,35 @@ $(document).ready(function () {
 			$('#feedback').empty();
 			sentenceIndex++;
 			currentSentence = sentences[sentenceIndex];
+			
 			if (currentSentence === undefined) {
-                gameOver();
-                $(document).off();
-                $('#target-letter').empty();
-                $('#target-letter').append(`<button class ="button" onClick="window.location.reload();"> Would you like to try again?</button>`)
+				gameOver();
+				$(document).off();
+				$('#target-letter').empty();
+				$('#target-letter').append(
+					`<button class ="button"4 onClick="window.location.reload();"> Would you like to try again?</button>`
+				);
 			} else {
 				$('#sentence').append(currentSentence);
-
 				letterIndex = 0;
 				if (sentenceIndex < sentences.length - 1) {
 					nextLetter = currentSentence[letterIndex];
 				}
-
 				currentLetterDiv.text(nextLetter);
 				$('#yellow-block').css({ left: 17 });
 			}
 		}
 	});
 
+	
+	
+	
 	function gameOver() {
 		sentenceIndex = 0;
 		finish = Date.now();
 		let time = finish - start;
-		time /= 60000;
-		let score = Math.round(54 / time - 2 * errors);
+		time = time / 1000 / 60;
+		let score = Math.floor(54 / time - 2 * errors);
 		$('#feedback').text('Your score is ' + score + ' words per minute. GET IT MY HOMIE!');
 	}
 });
